@@ -1,6 +1,9 @@
 <?php if ( function_exists('add_theme_support') ) {
 add_theme_support('post-thumbnails');
-//add_image_size('wider', 1920, 550, true );
+add_image_size('col-6', 960, 920, true );
+add_image_size('col-7', (1920/12)*7, (920/4)*3, true );
+add_image_size('col-4', 640, 612, true );
+add_image_size('mini', (1920/12)*1, (920/8)*1, true );
 }
 /* 
 add_filter('image_size_names_choose', 'my_image_sizes');
@@ -25,7 +28,7 @@ add_action( 'init', 'register_my_menu' );
 <?php 
 function call_scripts() {
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', 'http://code.jquery.com/jquery-1.9.1.min.js');
+	wp_register_script('jquery', 'http://code.jquery.com/jquery-1.10.0.min.js');
     wp_register_script('core', get_template_directory_uri() . '/js/core.js');
 
     wp_enqueue_script('jquery');
@@ -37,26 +40,62 @@ add_action('wp_enqueue_scripts', 'call_scripts');
 <?php
 //Post type register
 
-/* add_action('init', 'alcaldes_register');
-function alcaldes_register() {
+add_action('init', 'viajes_de_estudio_register');
+function viajes_de_estudio_register() {
     $args = array(
-        'label' => 'Alcaldes',
-        'singular_label' => 'Alcalde',
+        'label' => 'Viajes de estudio',
+        'singular_label' => 'Viaje',
         'public' => true,
-		'menu_position' => 15, 
+		'menu_position' => 5, 
         '_builtin' => false,
         'capability_type' => 'post',
 		'has_archive' => false,
         'hierarchical' => false,
-        'rewrite' => array( 'slug' => 'alcaldes'),
+        'rewrite' => array( 'slug' => 'viajes-de-estudio'),
         'supports' => array('title', 'editor' , 'excerpt' , 'thumbnail' )
     );
-    register_post_type('alcaldes', $args);
+    register_post_type('viajes-de-estudio', $args);
     flush_rewrite_rules();
-} */
+}
 
 
-//register_taxonomy("servicios", array('post' , 'staff' , 'documentos'), array("hierarchical" => true, "label" => "Servicios", "singular_label" => "Servicio", "rewrite" => true));
+register_taxonomy("destino", array('viajes-de-estudio'), array("hierarchical" => true, "label" => "Destinos", "singular_label" => "Destino", "rewrite" => true));
+
+add_action('init', 'clientes_register');
+function clientes_register() {
+    $args = array(
+        'label' => 'Clientes',
+        'singular_label' => 'Cliente',
+        'public' => true,
+		'menu_position' => 5, 
+        '_builtin' => false,
+        'capability_type' => 'post',
+		'has_archive' => false,
+        'hierarchical' => false,
+        'rewrite' => array( 'slug' => 'clientes'),
+        'supports' => array('title', 'editor' , 'excerpt' , 'thumbnail' )
+    );
+    register_post_type('clientes', $args);
+    flush_rewrite_rules();
+}
+
+add_action('init', 'testimonios_register');
+function testimonios_register() {
+    $args = array(
+        'label' => 'Testimonios',
+        'singular_label' => 'Testimonio',
+        'public' => true,
+		'menu_position' => 5, 
+        '_builtin' => false,
+        'capability_type' => 'post',
+		'has_archive' => false,
+        'hierarchical' => false,
+        'rewrite' => array( 'slug' => 'testimonios'),
+        'supports' => array('title', 'editor' , 'excerpt' , 'thumbnail' )
+    );
+    register_post_type('testimonios', $args);
+    flush_rewrite_rules();
+}
 
 ?>
 

@@ -16,9 +16,9 @@ jQuery(document).ready(function($) {
 <?php $bg = wp_get_attachment_image_src( $imgID , 'full')?>
 	
 	jQuery('#area-<?php echo $area->ID?>').hover(function() {
-		jQuery('body').css('background-image', 'url(<?php echo $bg[0]?>)')
+		jQuery('body').delay(300).css('background-image', 'url(<?php echo $bg[0]?>)')
 	}, function() {
-		jQuery('body').css('background-image' , 'url(<?php echo $bgd[0] ?>)')
+		jQuery('body').delay(300).css('background-image' , 'url(<?php echo $bgd[0] ?>)')
 	});
 
 <?php endforeach;?>
@@ -26,6 +26,10 @@ jQuery(document).ready(function($) {
 </script>
 
 <div class="areas">
+	<div class="title">
+    	El sentido de <strong>descubrir</strong>
+    </div>
+    <div class="clear hidden-md hidden-lg"></div>
 <?php foreach($areas as $area):?>
 	<div class="rombo" id="area-<?php echo $area->ID?>">
 		<a class="text" href="<?php echo get_permalink($area->ID)?>"><?php echo $area->post_title?></a>
